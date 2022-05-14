@@ -54,7 +54,7 @@ app.put('/bejegyzes', (req, res) => {
       }
       if (rekordok.length !== 0) {
         connection.execute(
-          'update bejegyzes set tartalom = ? where felhasznaloAzonosito = ? AND datum = ?',
+          'UPDATE bejegyzes SET tartalom = ? WHERE felhasznaloAzonosito = ? AND datum = ?',
           [tartalom, felhasznaloAzonosito, datum],
           (hiba, eredmeny) => {
             if (hiba) {
@@ -65,7 +65,7 @@ app.put('/bejegyzes', (req, res) => {
         )
       } else {
         connection.execute(
-          'insert into bejegyzes (felhasznaloAzonosito, datum, tartalom) values (?, ?, ?)',
+          'INSERT INTO bejegyzes (felhasznaloAzonosito, datum, tartalom) VALUES (?, ?, ?)',
           [felhasznaloAzonosito, datum, tartalom],
           (hiba, eredmeny) => {
             if (hiba) {
