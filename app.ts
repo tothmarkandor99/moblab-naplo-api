@@ -1,8 +1,9 @@
-import express, {response} from 'express'
+import express from 'express'
 import * as bodyParser from 'body-parser'
 import {Bejegyzes} from './model/bejegyzes'
 import mysql from 'mysql2'
 import {BejegyzesDb} from './model/bejegyzesDb'
+import cors from 'cors'
 
 const app = express()
 
@@ -13,7 +14,10 @@ const connection = mysql.createConnection({
   database: 'moblab',
 })
 
+app.use(cors())
+
 app.use(bodyParser.json())
+
 app.get('/bejegyzesek/:felhasznaloAzonosito', (req, res) => {
   if (req.params.felhasznaloAzonosito.length > 100) {
     return res.status(400).send('Hibás azonosító')
